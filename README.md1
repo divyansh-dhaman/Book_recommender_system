@@ -1,0 +1,39 @@
+#include #include #include
+
+// Define a Book class to represent books with their attributes. class Book { public: std::string title; std::string author; std::string genre;
+
+Book(const std::string& title, const std::string& author, const std::string& genre)
+    : title(title), author(author), genre(genre) {}
+};
+
+// Function to recommend books based on the user's preferred genre. std::vector recommendBooks(const std::vector& library, const std::string& preferredGenre) { std::vector recommendedBooks;
+
+for (const Book& book : library) {
+    if (book.genre == preferredGenre) {
+        recommendedBooks.push_back(book);
+    }
+}
+
+return recommendedBooks;
+}
+
+int main() { // Create a library of books. std::vector library; library.push_back(Book("Book1", "Author1", "Mystery")); library.push_back(Book("Book2", "Author2", "Science Fiction")); library.push_back(Book("Book3", "Author3", "Romance")); library.push_back(Book("Book4", "Author4", "Mystery")); library.push_back(Book("Book5", "Author5", "Science Fiction"));
+
+// User's preferred genre (e.g., "Mystery").
+std::string preferredGenre = "Mystery";
+
+// Recommend books based on the user's preferred genre.
+std::vector<Book> recommendedBooks = recommendBooks(library, preferredGenre);
+
+// Display the recommended books.
+if (recommendedBooks.empty()) {
+    std::cout << "No books in the preferred genre found." << std::endl;
+} else {
+    std::cout << "Recommended Books in the " << preferredGenre << " genre:" << std::endl;
+    for (const Book& book : recommendedBooks) {
+        std::cout << "Title: " << book.title << ", Author: " << book.author << std::endl;
+    }
+}
+
+return 0;
+}
